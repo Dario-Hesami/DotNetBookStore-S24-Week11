@@ -41,3 +41,7 @@ th > a {
 .card-body > a {
     text-decoration: none;
 }
+
+.cart-images {
+    height: 9rem;
+}

@@ -1,5 +1,6 @@
 ﻿using DotNetBookstore.Models;
 using DotNetBookStore.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -138,6 +139,13 @@ namespace DotNetBookStore.Controllers
 
             // refresh and display cart
             return RedirectToAction("Cart");
+        }
+
+        // GET: /Shop/Ceckout | display an empty chekout form to get customer info
+        [Authorize]
+        public IActionResult Checkout()
+        {
+            return View();
         }
 
     }

@@ -6,6 +6,16 @@
 
 <h1>Cart</h1>
 
+@if(Model.Count() == 0 )
+{
+    <h4 class="text-danger">Your Cart is Empty</h4>
+    <a class="btn btn-primary" asp-action="Index">Start Shopping</a>
+
+}
+else
+{
+    decimal total = 0;    
+
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -26,7 +36,8 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+                total += (item.Price * item.Quantity);
+                <tr>
                 <td>
                     <a asp-controller="Books" asp-action="Details" asp-route-id="@item.BookId">
                         @Html.DisplayFor(modelItem => item.Book.Title)
@@ -58,5 +69,22 @@
                 </td>
             </tr>
         }
+
+        @* display total *@
+            <tr>
+                <td colspan="2">
+                <td><strong><span class="text-primary">Total: </span>@String.Format("{0:c}", total)</strong>	 </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Index">
+                        Continue Shopping
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Checkout">
+                        Checkout
+                    </a>
+                </td>
+            </tr>
     </tbody>
 </table>
+}
